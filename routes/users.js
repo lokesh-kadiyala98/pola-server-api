@@ -8,10 +8,10 @@ const cors = require('cors')
 const PORT = process.env.PORT || 5000;
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Jyothi123',
-    database: 'pola_db'
+    host: 'remotemysql.com',
+    user: '2fofgUERBW',
+    password: 'tag6tutLcH',
+    database: '2fofgUERBW'
 })
 
 app.use(cors())
