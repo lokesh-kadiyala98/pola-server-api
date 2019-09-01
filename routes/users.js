@@ -15,21 +15,6 @@ const connection = mysql.createConnection({
     database: '2fofgUERBW'
 });
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'lokesh.pandu1998@gmail.com',
-    pass: 'pandu12345'
-  }
-});
-
-const mailOptions = {
-  from: 'lokesh.pandu198@gmail.com',
-  to: 'lokeshcse.rymec@gmail.com',
-  subject: 'Customer Story',
-  text: 'That was easy!'
-}
-
 app.use(cors())
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -56,14 +41,6 @@ app.get('/send_opinion', (req, res) => {
       res.sendStatus(500)
       return
     }
-
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error){
-        res.json({ success: false })
-        res.sendStatus(500)
-        return
-      }
-    })
 
     res.json({ success: true })
   })  
