@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const nodemailer = require('nodemailer')
 
 const PORT = process.env.PORT || 5000;
 
@@ -12,7 +13,22 @@ const connection = mysql.createConnection({
     user: '2fofgUERBW',
     password: 'tag6tutLcH',
     database: '2fofgUERBW'
-})
+});
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'lokesh.pandu1998@gmail.com',
+    pass: 'pandu12345'
+  }
+});
+
+const mailOptions = {
+  from: 'lokesh.pandu198@gmail.com',
+  to: 'lokeshcse.rymec@gmail.com',
+  subject: 'Customer Story',
+  text: 'That was easy!'
+}
 
 app.use(cors())
 
@@ -40,6 +56,14 @@ app.get('/send_opinion', (req, res) => {
       res.sendStatus(500)
       return
     }
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error){
+        res.json({ success: false })
+        res.sendStatus(500)
+        return
+      }
+    })
 
     res.json({ success: true })
   })  
